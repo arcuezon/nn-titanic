@@ -44,6 +44,7 @@ def read_data():
 
 def init_param(layer_dims):
     params = {}
+    np.random.seed(1238)
 
     # Set hidden layers and units
     n_h = layer_dims["n_h"]
@@ -209,6 +210,8 @@ def L_backward(Y_hat, Y, caches):
             activation_backwards(grads["dA" + str(l)], current_cache, activation = "relu")
 
     return grads
+
+### Update Parameters ###
 
 def update_params(params, grads, learning_rate = 0.01):
     L = len(params) // 2
