@@ -27,8 +27,8 @@ assert(X.shape[1] == Y.shape[0])  # Check if dims are correct
 # Choose dimension
 if(load_params == False):
     print("Initializing Parameters...")
-    #layer_dims = {"n_h": 5, "n_4" : 10, "n_5" : 8, "n_3": 5, "n_1": 3, "n_2": 3, "y": Y.shape[1], "n_0": X.shape[0]}
-    layer_dims = {"n_h" : 1, "n_1" : 6, "y" : Y.shape[1], "n_0" : X.shape[0]}
+    #layer_dims = {"n_h": 2, "n_1": 5, "n_2": 3, "y": Y.shape[1], "n_0": X.shape[0]}
+    layer_dims = {"n_h" : 1, "n_1" : 4, "y" : Y.shape[1], "n_0" : X.shape[0]}
 
     # Initialize parameters
     params = {}
@@ -45,7 +45,7 @@ if(grads_momentum):
         vgrads["dW" + str(l)] = 0
         vgrads["db" + str(l)] = 0
 
-for epoch in range(1, 100):
+for epoch in range(1, 800):
     # forward prop
     Y_hat, caches = L_forward(X, params)
 
@@ -57,11 +57,13 @@ for epoch in range(1, 100):
 
     #Learning rate decay
     if(rate_decay):
-        alpha = 1
-        learning_rate = np.divide(1, np.sqrt(epoch)) * alpha
+        alpha = 1.9
+        decay_rate = 0.01
+        #learning_rate = np.divide(decay_rate, np.sqrt(epoch)) * alpha
+        learning_rate = np.divide(1, 1 + decay_rate * epoch) * alpha
 
     else:
-        learning_rate = 20
+        learning_rate = 0.5
 
     # Update params
     #Momentum
@@ -69,15 +71,15 @@ for epoch in range(1, 100):
         beta = 0.9
         L = len(caches)
         for l in range(1, L + 1):
-            vgrads["dW" + str(l)] = beta * vgrads["dW" + str(l)] + grads["dW" + str(l)]
-            vgrads["db" + str(l)] = beta * vgrads["db" + str(l)] + grads["db" + str(l)]
+            vgrads["dW" + str(l)] = beta * vgrads["dW" + str(l)] + (1 - beta) * grads["dW" + str(l)]
+            vgrads["db" + str(l)] = beta * vgrads["db" + str(l)] + (1 - beta) * grads["db" + str(l)]
 
         params = update_params(params, vgrads, learning_rate=learning_rate)
     #No Momentum
     else:
         params = update_params(params, grads, learning_rate=learning_rate)
 
-    if(epoch % 1000 == 0):
+    if(epoch % 10 == 0):
         print("Epoch:", epoch, end='')
         print(" Cost =", J)
         print("Learning rate =", learning_rate)

@@ -53,7 +53,7 @@ def init_param(layer_dims):
 
     for l in range(1, n_h + 1):
         n = layer_dims["n_" + str(l)]
-        params["W" + str(l)] = np.random.randn(n, layer_dims["n_" + str(l - 1)]) * 0.01
+        params["W" + str(l)] = np.random.randn(n, layer_dims["n_" + str(l - 1)]) * np.sqrt(2 / layer_dims["n_" + str(l - 1)])
         params["b" + str(l)] = np.zeros((n, 1))
 
     L = n_h + 1
