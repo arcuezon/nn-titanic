@@ -24,6 +24,10 @@ print(len(params))
 #forward prop
 Y_hat, caches = L_forward(X, params)
 
-#back prop
+#Compute Cost
 J = compute_cost(Y_hat, Y)
 print(J)
+
+#Back prop
+linear_activation_backward(Y_hat, Y, caches)
+
