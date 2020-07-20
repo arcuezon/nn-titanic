@@ -6,6 +6,7 @@ def init_param(layer_dims):
 
     # Set hidden layers and units
     n_h = layer_dims["n_h"]
+    assert(len(layer_dims) == 3 + n_h)
     print("# of hidden layers = " + str(n_h))
 
     for l in range(1, n_h + 1):
@@ -20,8 +21,9 @@ def init_param(layer_dims):
     return params
 
 def check_params(params):
-    
-    for l in range(1, 4):
+    L = len(params) // 2
+
+    for l in range(1, L + 1):
         curW = "W" + str(l)
         curb = "b" + str(l)
         print(curW + " shape: " + str(params[curW].shape))

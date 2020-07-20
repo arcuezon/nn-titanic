@@ -2,7 +2,7 @@ import numpy as np
 
 
 def sigmoid(z):
-    g = 1 / (1 + np.exp(z))
+    g = np.divide(1, (1 + np.exp(-z)))
     return g
 
 
@@ -45,9 +45,7 @@ def L_forward(X, params):
         A, activation_cache = activation(Z, activation="relu")
         A_prev = A
         caches.append((linear_cache, activation_cache))
-        print("Layer " + str(l))
-
-    print("Layer " + str(l + 1))
+        #print("Layer " + str(l + 1))
     W = params["W" + str(l + 1)]
     b = params["b" + str(l + 1)]
     Z, linear_cache = linear_forward(A_prev, W, b)

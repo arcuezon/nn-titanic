@@ -1,2 +1,8 @@
 #Ignore __pycache__
 **/__pycache__
+
+#Ignore test code
+src/test.py
+src/testCases_v4a.py
+src/testcases.py
+src/L_NN_model_cupy.py
