@@ -7,7 +7,7 @@
 <p> A lot can certainly be improved with the code but as I said, I really only wanted proof of concept of my understanding of Neural Nets.</p>
 
 <h4>Best attempt:</h4>
-<strong>Score of 0.779</strong>
+<strong>Score of 0.779</strong> <br>
 <em>1-layer Neural Network with 3 units.</em>
 <ul>
   <li>Activations</li>
@@ -15,15 +15,16 @@
     <li>ReLU for hidden layers</li>
     <li>Sigmoid for output layer</li>
   </ul>
-  <li>Applied Learning rate decay</li>
+  <li>Learning rate decay</li>
+  <li>Gradient Descent with Momentum</li>
   </ul>
-  <em>Inupt Features</em>
-  <ol>
-    <li>Passenger Class</li>
-    <li>Sex</li>
-    <li>Age</li>
-    <li># of Siblings or Spouses onboard</li>
-    <li># of Parents or Children onboard</li>
-    <li>Fare</li>
-    <li>Port of Embarkation</li>
-  </ol>
+ <em>Inupt Features</em>
+ <ol>
+  <li>Passenger Class</li>
+  <li>Sex</li>
+  <li>Age</li>
+  <li># of Siblings or Spouses onboard</li>
+  <li># of Parents or Children onboard</li>
+  <li>Fare</li>
+  <li>Port of Embarkation</li>
+</ol>
