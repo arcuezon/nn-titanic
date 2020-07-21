@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
-import cupy as cp
 
-#from data_read import *
 from L_NN_model import *
 
 save_params = True
