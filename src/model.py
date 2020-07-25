@@ -6,16 +6,14 @@ from L_NN_model import *
 
 def L_layer_NN(X, Y, layer_dims={}, save_params=True, load_params=False,
                optimizer='', rate_decay=False, learning_rate=0.01,
-               epochs=1000, decay_rate=0.1, beta1=0.9, beta2=0.999):
+               epochs=1000, decay_rate=0.1, beta1=0.9, beta2=0.999,
+               sigma = 0):
 
     assert(X.shape[1] == Y.shape[0])  # Check if dims are correct
 
     # Choose dimension
     if(load_params == False):
         print("Initializing Parameters...")
-        #layer_dims = {"n_h": 2, "n_1": 5, "n_2": 3, "y": Y.shape[1], "n_0": X.shape[0]}
-        # layer_dims = {"n_h": 1, "n_1": 4,
-        #              "y": Y.shape[1], "n_0": X.shape[0]}
 
         # Initialize parameters
         params = {}
@@ -24,7 +22,7 @@ def L_layer_NN(X, Y, layer_dims={}, save_params=True, load_params=False,
     else:
         params = np.load('my_file.npy', allow_pickle='TRUE').item()
 
-    # Intitialize update dicts
+    # Intitialize update dicts for optimizers
     if(optimizer == 'Momentum' or optimizer == 'Adam'):  # Momentum
         vgrads = {}
         L = len(params) // 2
@@ -40,6 +38,7 @@ def L_layer_NN(X, Y, layer_dims={}, save_params=True, load_params=False,
             sgrads["dW" + str(l)] = 0
             sgrads["db" + str(l)] = 0
 
+    ### Run gradient descent ###
     for epoch in range(1, epochs):
         # forward prop
         Y_hat, caches = L_forward(X, params)
@@ -84,7 +83,7 @@ def L_layer_NN(X, Y, layer_dims={}, save_params=True, load_params=False,
                 sgrads["db" + str(l)] = beta2 * sgrads["db" +
                                                        str(l)] + (1 - beta2) * np.square(grads["db" + str(l)])
 
-        # No Momentum
+        # No Momentum/RMSprop
         else:
             params = update_params(params, grads, learning_rate=learning_rate)
 
@@ -93,6 +92,7 @@ def L_layer_NN(X, Y, layer_dims={}, save_params=True, load_params=False,
             print(" Cost =", J)
             print("Learning rate =", learning_rate)
 
+    ### Print Cost and accuracy on train set at end of training ###
     print("J =", J)
 
     Y_hat = Y_hat > 0.5

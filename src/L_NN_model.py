@@ -128,13 +128,14 @@ def L_forward(X, params):
 
 ### COST FUNCTION ###
 
-def compute_cost(Y_hat, Y):
+def compute_cost(Y_hat, Y, sigma = 0):
     Y = Y.T
     m = Y.shape[1]
 
     assert(Y_hat.shape == Y.shape)
 
     J = np.sum(Y * np.log(Y_hat) + (1 - Y) * np.log(1 - Y_hat)) / -m
+    #J += np.divide(sigma, 2 * m) * np.sum(np.square(params["W"]))
 
     return J
 
