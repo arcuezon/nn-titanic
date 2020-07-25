@@ -8,3 +8,4 @@ src/test_code/test.py
 src/test_code/L_NN_model_cupy.py
 **/submitted
 src/test.npy
+test.ipynb

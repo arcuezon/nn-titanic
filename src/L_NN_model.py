@@ -223,3 +223,17 @@ def update_params(params, grads, learning_rate = 0.01):
 
     return params
 
+def RMSprop(params, grads, sgrads, learning_rate = 0.01):
+    L = len(params) // 2
+    epsilon = 10E-8
+
+    for l in range(1, L + 1):
+        sdW = np.sqrt(sgrads["dW" + str(l)]) + epsilon
+        sdb = np.sqrt(sgrads["db" + str(l)]) + epsilon
+
+        params["W" + str(l)] -= learning_rate * np.divide(grads["dW" + str(l)], sdW)
+        params["b" + str(l)] -= learning_rate * np.divide(grads["db" + str(l)], sdb)
+
+    
+    return params
+
